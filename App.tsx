@@ -244,6 +244,11 @@ export default function App() {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>CD Borrow App</Text>
 
+        <View style={styles.summary}>
+          <Text style={styles.summaryText}>Total borrowed: {totalBorrowed}</Text>
+          <Text style={styles.summaryText}>Total income: PHP {totalIncome}</Text>
+        </View>
+
         <View style={styles.row}>
           <TextInput
             style={styles.input}

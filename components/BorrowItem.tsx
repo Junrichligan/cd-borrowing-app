@@ -11,11 +11,15 @@ interface Props {
 
 const BorrowItem: React.FC<Props> = ({ item, onReturn }) => {
   const calculatePenalty = () => {
+    // Compare dates without time so the due date itself isn't considered overdue.
     const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
     const due = new Date(item.dueDate)
+    due.setHours(0, 0, 0, 0)
 
     if (today > due) {
-      const diffDays = Math.ceil(
+      const diffDays = Math.floor(
         (today.getTime() - due.getTime()) / (1000 * 60 * 60 * 24)
       )
       return diffDays * PENALTY_PER_DAY

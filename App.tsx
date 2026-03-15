@@ -54,8 +54,24 @@ export default function App() {
     const savedTotalBorrowed = await loadData("totalBorrowed")
     const savedBorrowerHistory = await loadData("borrowerHistory")
 
-    if (savedCDs) setCds(savedCDs)
-    else initializeCDs()
+    // If saved data exists but is clearly inconsistent (e.g. all copies are 0 while nothing is borrowed), reset to defaults.
+    const shouldResetToDefault =
+      Array.isArray(savedCDs) &&
+      savedCDs.length > 0 &&
+      savedCDs.every((cd) => cd.copies === 0) &&
+      (!Array.isArray(savedBorrowed) || savedBorrowed.length === 0)
+
+    if (shouldResetToDefault) {
+      initializeCDs()
+      saveData("borrowed", [])
+      saveData("income", 0)
+      saveData("totalBorrowed", 0)
+      saveData("borrowerHistory", [])
+    } else if (savedCDs) {
+      setCds(savedCDs)
+    } else {
+      initializeCDs()
+    }
 
     if (savedBorrowed) setBorrowed(savedBorrowed)
     if (savedIncome) setTotalIncome(savedIncome)

@@ -73,11 +73,15 @@ export default function App() {
   }
 
   const calculatePenalty = (dueDateString: string) => {
+    // Use date-only comparison to avoid charging a penalty on the due date itself.
     const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
     const due = new Date(dueDateString)
+    due.setHours(0, 0, 0, 0)
 
     if (today > due) {
-      const diffDays = Math.ceil(
+      const diffDays = Math.floor(
         (today.getTime() - due.getTime()) / (1000 * 60 * 60 * 24)
       )
       return diffDays * PENALTY_PER_DAY
@@ -125,6 +129,7 @@ export default function App() {
 
   const borrowCD = (id: string) => {
     const cdIndex = cds.findIndex((cd) => cd.id === id)
+    if (cdIndex < 0) return
 
     if (cds[cdIndex].copies === 0) {
       Alert.alert("CD not available")
@@ -207,6 +212,7 @@ export default function App() {
     setTotalIncome(0)
     setTotalBorrowed(0)
     setBorrowerName("User")
+    setBorrowerHistory([])
     setShowOverdueOnly(false)
     setSortAsc(true)
 
@@ -214,6 +220,7 @@ export default function App() {
     saveData("borrowed", [])
     saveData("income", 0)
     saveData("totalBorrowed", 0)
+    saveData("borrowerHistory", [])
   }
 
   return (

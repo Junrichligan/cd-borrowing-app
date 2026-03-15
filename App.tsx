@@ -65,9 +65,9 @@ export default function App() {
 
   const initializeCDs = () => {
     const initial: CD[] = [
-      { id: "1", title: "Thriller", artist: "Michael Jackson", copies: 3 },
-      { id: "2", title: "Back in Black", artist: "AC/DC", copies: 2 },
-      { id: "3", title: "21", artist: "Adele", copies: 4 }
+      { id: "1", title: "Thriller", artist: "Michael Jackson", copies: 5 },
+      { id: "2", title: "Back in Black", artist: "AC/DC", copies: 5 },
+      { id: "3", title: "21", artist: "Adele", copies: 5 }
     ]
     setCds(initial)
   }
@@ -202,9 +202,9 @@ export default function App() {
 
   const resetAllData = () => {
     const initial: CD[] = [
-      { id: "1", title: "Thriller", artist: "Michael Jackson", copies: 3 },
-      { id: "2", title: "Back in Black", artist: "AC/DC", copies: 2 },
-      { id: "3", title: "21", artist: "Adele", copies: 4 },
+      { id: "1", title: "Thriller", artist: "Michael Jackson", copies: 5 },
+      { id: "2", title: "Back in Black", artist: "AC/DC", copies: 5 },
+      { id: "3", title: "21", artist: "Adele", copies: 5 },
     ]
 
     setCds(initial)
